@@ -1,1 +1,1 @@
-web: gunicorn carwashagrigator.wsgi --log-file -
+web: gunicorn washing_site.wsgi --log-file -
