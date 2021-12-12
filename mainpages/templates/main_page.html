@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    <div style="background: url(&quot;{% static 'img/61b7a27ebb6837b2f4d2b631295aef4f.jpg' %}&quot;) center / cover;height: 600px;">
+        <div style="margin-left:32px;padding-top: 45px;">
+		<img src="{% static 'img/e35ffdc54f60ad4f00d5516f9b7af7f3.png' %}" width="52px" height="52px" style="margin-left: 180px;">
+		<a href="#" style="font-size: 15px;color: #FFFFFF;margin-left: 91px;font-family: PT Serif;text-shadow: 7px 2px 9px #000000;">Новости</a>
+		<a href="#" style="font-size: 15px;color: #FFFFFF;margin-left: 186px;font-family: PT Serif;text-shadow: 7px 2px 9px #000000;">Отзывы</a>
+		<a href="#" style="font-size: 15px;color: #FFFFFF;margin-left: 174px;font-family: PT Serif;text-shadow: 7px 2px 9px #000000;">Контакты</a>
+            <div class="d-inline-block" style="background: #FFFFFF;border-radius: 360px;width: 52px;height: 52px;margin-left: 91px;">
+                <img src="{% static 'img/085df0c7ea27cf9be22eaa3e3d075658.png' %}" width="44.72px" height="44.72px" style="margin: 3.64px;"></div>
+        </div>
+        <h1 style="color: #FFFFFF;width: 360px;height: 55px;margin-top: 311px;margin-left: 180px;font-family: Playfair Display;text-shadow: 7px 3px 6px #000000;">“Быстро и чисто”<br></h1>
+        <p style="color: #FFFFFF;font-size: 15px;width: 356px;height: 64px;margin-left: 180px;font-family: PT Serif;margin-top: 1px;text-shadow: 7px 2px 9px #000000;">Сайт, предназначенный специально для Вас - мы находим ближайшую к Вам автомойку, а Вы радуетесь чистой машине.</p>
+        <img class="float-start" src="{% static 'img/Tempclipboard-image.png' %}" style="margin-left: 577px;margin-top: -13px;" width="106.78px" height="51px">
+    </div>
+    <div style="height: 600px;margin-top: 0px;">
+        <h1 style="width: 550px;height: 116px;margin-left: auto;font-size: 45px;text-align: center;font-family: Playfair Display;margin-right: auto;color: #172D45;font-weight: bold;padding-top: 38px;">Самое время помыть машину!</h1>
+        <img src="{% static 'img/a371370fa7fa6f1e6f5aef6f8a0fcbdc.png' %}" width="55px" height="55px" style="margin-left: 180px;margin-top: 27px;">
+        <p class="d-inline-flex" style="width: 338px;height: 55px;margin-top: 82px;margin-left: 16px;font-size: 20px;font-family: PT Serif;color: #158D7F;">Экономим Ваши силы, считая время до ближайшей автомойки</p>
+        <img src="{% static 'img/4d5e34b71571b513fa8094334dd6a51b.png' %}" width="55px" height="55px" style="margin-left: 22px;margin-top: 27px;">
+        <p class="d-inline-flex" style="width: 290px;height: 55px;margin-top: 61px;margin-left: 16px;margin-right: 180px;font-size: 20px;font-family: PT Serif;color: #158D7F;">Прокладываем маршрут до необходимой Вам мойки<br></p>
+        <img src="{% static 'img/911e956153c6494af497d80b6a33cb88.png' %}" width="55px" height="55px" style="margin-left: 180px;margin-top: 27px;">
+        <p class="d-inline-flex" style="width: 338px;height: 55px;margin-top: 98px;margin-left: 16px;font-size: 20px;font-family: PT Serif;color: #158D7F;">Используем Вашу геопозицию, чтобы найти наилучшие варианты</p>
+        <img src="{% static 'img/f03b8200bdc2c3c019fe8851be081d72.png' %}" width="55px" height="55px" style="margin-left: 22px;margin-top: 27px;">
+        <p class="d-inline-flex" style="width: 338px;height: 55px;margin-top: 98px;margin-left: 16px;font-size: 20px;font-family: PT Serif;color: #158D7F;">Всегда рады Вашим комментариям и отзывам о работе сайта</p>
+        <img class="float-end" src="{% static 'img/lxK5VAOIwPI.jpg' %}" width="406px" height="283px" style="margin-top: 0px;">
+    </div>
+    <div style="height: 600px;margin-top: -34px;padding-top: 19px;z-index: 1;">
+        <h1 class="d-grid d-xl-flex justify-content-xl-center align-items-xl-center" style="width: 558px;height: 53px;font-size: 45px;color: #172D45;font-family: Playfair Display;margin-left: 321px;font-weight: bold;text-align: center;">
+		<br>Автомойки поблизости<br>
+		<br>
+		</h1>
+        <div id="map" style="height: 407px;width: 593px;margin-right: auto;margin-left: auto;margin-top: 25px;"></div>
+		<button onclick="send_ajax()" class="btn btn-primary d-xl-flex" type="submit" style="margin-left: auto;margin-right: auto;margin-top: 25px;background: url(&quot;{% static 'img/VcKVQb-vlDE-removebg-preview.png' %}&quot;) center / contain no-repeat;width: 220px;height: 46px;border-radius: 15px;"></button>
+        <img src="{% static 'img/image-removebg-preview.png' %}" width="371px" height="259px" style="margin-top: -238px;margin-left: -39px;z-index: -1;">
+    </div>
+    <div style="height: 109px;background: #172D45;z-index: 3;">
+        <p class="d-inline-block" style="color: #F8FAD3;font-family: PT Serif;font-size: 13px;width: 338px;height: 85px;margin-left: 200px;padding-top: 12px;">Создатели:<br>Разработчик серверной части сайта - Шальнев Владимир<br>Разработчик сайта - Духно Михаил<br>Дизайнер сайта - Гробова Софья</p>
+		<img src="{% static 'img/PAWbo5pFdEE.jpg' %}" width="106px" height="69.78px" style="border-radius: 10px;margin-top: -50px;margin-left:29px;">
+        <p class="d-inline-block" style="color: #F8FAD3;font-family: PT Serif;font-size: 13px;width: 338px;height: 85px;margin-left: 29px;padding-top: 12px;text-align:right;">Наши контакты:<br>Шальнев Владимир - vovik0312@gmail.com<br>Духно Михаил - misha.duhno@mail.ru<br>Гробова Софья - sofya.grobova@yandex.ru</p>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script
+	  src="https://code.jquery.com/jquery-3.6.0.js"
+	  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	  crossorigin="anonymous"></script>
+	<script src="https://api-maps.yandex.ru/2.0-stable/?apikey=69baf678-987f-4d0c-ac67-89f559e9c253&load=package.standard&lang=ru-RU" type="text/javascript"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=69baf678-987f-4d0c-ac67-89f559e9c253" type="text/javascript"></script>
+	<script type="text/javascript">
+	    function set(cookieName, cookieValue, nDays) {
+	        console.log("set");
+            var today = new Date();
+            var expire = new Date();
+            if (nDays == null || nDays == 0)
+                nDays = 1;
+            expire.setTime(today.getTime() + 3600000 * 24 * nDays);
+            document.cookie = cookieName + "=" + escape(cookieValue)
+                    + ";expires=" + expire.toGMTString()
+                    + ";path=/";
+
+        }
+
+        var position;
+        var res;
+        var count = 0;
+
+		function init() {
+			var myMap = new ymaps.Map('map', {
+				center: [47.20, 38.93],
+				zoom: 11,
+				controls: []
+				},{
+				searchControlProvider: 'yandex#search'
+			});
+
+			// Создадим экземпляр элемента управления «поиск по карте»
+			// с установленной опцией провайдера данных для поиска по организациям.
+			var searchControl = new ymaps.control.SearchControl({
+				options: {
+					provider: 'yandex#search'
+				}
+			});
+
+			var geolocation = ymaps.geolocation
+
+			// Сравним положение, вычисленное по ip пользователя и
+			// положение, вычисленное средствами браузера.
+
+			geolocation.get({
+				provider: 'browser',
+				mapStateAutoApply: true
+			}).then(function (result) {
+				// Синим цветом пометим положение, полученное через браузер.
+				// Если браузер не поддерживает эту функциональность, метка не будет добавлена на карту.
+				result.geoObjects.options.set('preset', 'islands#redCircleIcon');
+				myMap.geoObjects.add(result.geoObjects);
+				position = result.geoObjects.position
+			});
+
+			myMap.controls.add(searchControl);
+
+			// Программно выполним поиск определённых кафе в текущей
+			// прямоугольной области карты.
+			searchControl.search('Автомойка');
+			searchControl.events.add("load", function(e)
+			{
+			    res = searchControl.getResultsArray();
+			    console.log(res);
+			    res.forEach(function(e)
+			    {
+			        console.log(e.properties._data.companyMetaData.name);
+			        var name = e.properties._data.companyMetaData.name;
+			        var coords = e.geometry._coordinates;
+			        var id = e.properties._data.companyMetaData.id;
+			        var nname = count + "name";
+			        var nid = count + "id";
+			        var ncoords = count + "coords";
+			        set(nname, name, 1);
+			        set(nid, id, 1);
+			        set(ncoords, coords, 1);
+			        count = count + 1;
+			        console.log(e.properties._data.companyMetaData.coords);
+			    });
+				console.log(2);
+				set("pos", position, 1);
+				set("count", count, 1);
+				console.log(4);
+			});
+		}
+
+		ymaps.ready(init);
+	</script>
+    <script>
+        function get(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+        }
+        function send_ajax(){
+        var flag = "{{ flag }}";
+        console.log(flag);
+			if (flag == "True")
+			{
+			    console.log("relocate");
+				var position = get("pos");
+				var res = get("result");
+				var csrfmiddlewaretoken = '{{ csrf_token }}';
+				var count = get("count");
+				console.log(count);
+				var dataDict = {};
+				dataDict["csrfmiddlewaretoken"] = csrfmiddlewaretoken;
+				dataDict["count"] = count;
+				dataDict["pos"] = position;
+				for(var i= 0; i < count; i++)
+				{
+					var name = i + "name";
+					var id = i + "id";
+					var coords = i + "coords";
+					dataDict[name] = get(name);
+					dataDict[coords] = get(coords);
+					dataDict[id] = get(id);
+					console.log(dataDict[i + "name"]);
+					console.log(i);
+				}
+				console.log(dataDict);
+				$.ajax({
+							type: "POST",
+							data: dataDict,
+							url:"/main/",
+							success: function(e){location.replace("./road_map");},
+							error: function(e){console.log("err");}
+				});
+			}
+			else
+			{
+				location.replace("./auth/login");
+			}
+		}
+    </script>
+</body>
+
+</html>

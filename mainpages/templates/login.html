@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>auth</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body><img class="float-end" src="{% static 'img/OWZHEAwHssI-removebg-preview.png' %}" width="356.72px" height="365.95px">
+    <div style="width: 408px;height: 75px;margin-left: auto;margin-right: auto;margin-top: 36px;">
+        <img class="d-inline-block float-start d-md-flex align-items-md-center" src="{% static 'img/085df0c7ea27cf9be22eaa3e3d075658.png' %}" width="64.5px" height="64.5px">
+        <h1 class="d-inline-block float-start d-md-flex align-items-md-center" style="font-family: Playfair Display;font-size: 45px;color: #172D45;font-weight: bold;margin-bottom: 5px;margin-left: 19px;">Авторизация</h1>
+    </div>
+    <div style="background: url(&quot;{% static 'img/JobHIJQOihE-removebg-preview.png' %}&quot;) center / contain no-repeat;">
+        <div style="width: 372px;height: 396px;border-radius: 20px;margin-right: auto;margin-left: auto;margin-top: 23px;background: #F8FAD3;">
+            <form method="post" style="z-index:2;height: 280px;padding-top: 50px;border-radius: 20px;">{% csrf_token %}
+                <input name="login" class="form-control" type="text" style="width: 314px;height: 52px;border-radius: 15px;background: #68BEB1;margin-left: 29px;" value="Логин">
+                <input name="password" class="form-control" type="password" style="width: 314px;height: 52px;border-radius: 15px;background: #68BEB1;margin-left: 29px;margin-top: 25px;" value="Пароль">
+                <button onclick="send_inf()" class="btn btn-primary" type="submit" style="margin-top: 55px;width: 314px;height: 46px;margin-left: 29px;border-radius: 15px;">Вход</button>
+            </form><button onclick="relocate_reg()" class="btn btn-primary" type="button" style="z-index:2;width: 314px;height: 46px;border-radius: 15px;margin-top: 25px;margin-left: 29px;">Регистрация</button>
+        </div>
+    </div><img src="{% static 'img/DPOOuLNbUA8-removebg-preview.png' %}" width="376px" height="385.95px" style="margin-top: -250px;">
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script>
+        function send_inf()
+        {
+            $.ajax({
+							type: "POST",
+							data: {login: $('input[name=login]').val(),
+							        password: $('input[name=password]').val()},
+							url:"/main/",
+							success: function(e){console.log("suck");},
+							error: function(e){console.log("err");}
+				});
+        }
+        function relocate_reg()
+        {
+            location.replace("/main/auth/registration");
+        }
+    </script>
+</body>
+
+</html>

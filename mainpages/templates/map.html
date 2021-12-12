@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Untitled</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+    {% csrf_token %}
+    <div style="height: 600px;margin-top: -34px;padding-top: 19px;z-index: 1;">
+        <h1 class="d-grid d-xl-flex justify-content-xl-center align-items-xl-center" style="text-align:center;width: 558px;height: 53px;font-size: 45px;color: #172D45;font-family: Playfair Display;margin-left: 391px;margin-top:30px;font-weight: bold;text-align: center;">
+		<br>Маршрут<br>
+		<br>
+		</h1>
+        <div class="order-last" id="map" style="height: 407px;width: 593px;margin-right: auto;margin-left: auto;margin-top: 25px;"></div>
+		<img src="{% static 'img/image-removebg-preview.png' %}" width="371px" height="259px" style="margin-top: -163px;margin-left: -39px;z-index: -1;">
+    </div>
+    <div style="height: 109px;background: #172D45;z-index: 3;margin-top:30px;">
+        <p class="d-inline-block" style="color: #F8FAD3;font-family: PT Serif;font-size: 13px;width: 338px;height: 85px;margin-left: 200px;padding-top: 12px;">Создатели:<br>Разработчик серверной части сайта - Шальнев Владимир<br>Разработчик сайта - Духно Михаил<br>Дизайнер сайта - Гробова Софья</p>
+		<img src="{% static 'img/PAWbo5pFdEE.jpg' %}" width="106px" height="69.78px" style="border-radius: 10px;margin-top: -50px;margin-left:29px;">
+        <p class="d-inline-block" style="color: #F8FAD3;font-family: PT Serif;font-size: 13px;width: 338px;height: 85px;margin-left: 29px;padding-top: 12px;text-align:right;">Наши контакты:<br>Шальнев Владимир - vovik0312@gmail.com<br>Духно Михаил - misha.duhno@mail.ru<br>Гробова Софья - sofya.grobova@yandex.ru</p>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script
+	  src="https://code.jquery.com/jquery-3.6.0.js"
+	  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	  crossorigin="anonymous"></script>
+	<script src="https://api-maps.yandex.ru/2.0-stable/?apikey=69baf678-987f-4d0c-ac67-89f559e9c253&load=package.standard&lang=ru-RU" type="text/javascript"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=69baf678-987f-4d0c-ac67-89f559e9c253" type="text/javascript"></script>
+	<script type="text/javascript">
+	    function init () {
+	    console.log({{pos}});
+        var user_x = {{ pos_x }};
+        var user_y = {{ pos_y }};
+        var wash_x = {{ coords_x }};
+        var wash_y = {{ coords_y }};
+        var multiRoute = new ymaps.multiRouter.MultiRoute({
+            // Описание опорных точек мультимаршрута.
+            referencePoints: [
+                [user_x, user_y],
+                [wash_x, wash_y]
+            ],
+            // Параметры маршрутизации.
+            params: {
+                // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
+                results: 1
+            }
+        }, {
+            // Автоматически устанавливать границы карты так, чтобы маршрут был виден целиком.
+            boundsAutoApply: true
+        });
+
+        // Создаем кнопки для управления мультимаршрутом.
+        var trafficButton = new ymaps.control.Button({
+                data: { content: "Учитывать пробки" },
+                options: { selectOnClick: true }
+            }),
+            viaPointButton = new ymaps.control.Button({
+                data: { content: "Добавить транзитную точку" },
+                options: { selectOnClick: true }
+            });
+
+        // Объявляем обработчики для кнопок.
+        trafficButton.events.add('select', function () {
+            /**
+             * Задаем параметры маршрутизации для модели мультимаршрута.
+             * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRouteModel.xml#setParams
+             */
+            multiRoute.model.setParams({ avoidTrafficJams: true }, true);
+        });
+
+        trafficButton.events.add('deselect', function () {
+            multiRoute.model.setParams({ avoidTrafficJams: false }, true);
+        });
+
+        viaPointButton.events.add('select', function () {
+            var referencePoints = multiRoute.model.getReferencePoints();
+            referencePoints.splice(1, 0, "Москва, ул. Солянка, 7");
+            /**
+             * Добавляем транзитную точку в модель мультимаршрута.
+             * Обратите внимание, что транзитные точки могут находится только
+             * между двумя путевыми точками, т.е. не могут быть крайними точками маршрута.
+             * @see https://api.yandex.ru/maps/doc/jsapi/2.1/ref/reference/multiRouter.MultiRouteModel.xml#setReferencePoints
+             */
+            multiRoute.model.setReferencePoints(referencePoints, [1]);
+        });
+
+        viaPointButton.events.add('deselect', function () {
+            var referencePoints = multiRoute.model.getReferencePoints();
+            referencePoints.splice(1, 1);
+            multiRoute.model.setReferencePoints(referencePoints, []);
+        });
+
+        // Создаем карту с добавленными на нее кнопками.
+        var myMap = new ymaps.Map('map', {
+            center: [55.750625, 37.626],
+            zoom: 7,
+            controls: [trafficButton, viaPointButton]
+        }, {
+            buttonMaxWidth: 300
+        });
+
+        // Добавляем мультимаршрут на карту.
+        myMap.geoObjects.add(multiRoute);
+    }
+
+    ymaps.ready(init);
+	</script>
+    <script>
+        function get(c_name) {
+            var i, x, y, ARRcookies = document.cookie.split(";");
+            for (i = 0; i < ARRcookies.length; i++) {
+                x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+                y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+                x = x.replace(/^\s+|\s+$/g, "");
+                if (x == c_name) {
+                    return unescape(y);
+                }
+            }
+		}
+    </script>
+</body>
+
+</html>
